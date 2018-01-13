@@ -7,14 +7,15 @@ class Card:
         self.suit = suit
 
     def __str__(self):
-        if self.rank > 10:
-            rankPrint = ['J', 'Q', 'K', 'A'][self.rank - 11]
+        if self.rank > 9:
+            rankPrint = ['T', 'J', 'Q', 'K', 'A'][self.rank - 10]
         else:
             rankPrint = str(self.rank)
-        suitSymbols = {'s' : '\xE2\x99\xA0',
-                       'c' : '\xE2\x99\xA3',
-                       'h' : '\xE2\x99\xA5',
-                       'd' : '\xE2\x99\xA6'}  
+        rankPrint = '\x1b[0;37;44m' + rankPrint + '\x1b[0m'
+        suitSymbols = {'s' : '\x1b[0;30;44m\xE2\x99\xA0\x1b[0m',
+                       'c' : '\x1b[0;30;44m\xE2\x99\xA3\x1b[0m',
+                       'h' : '\x1b[0;31;44m\xE2\x99\xA5\x1b[0m',
+                       'd' : '\x1b[0;31;44m\xE2\x99\xA6\x1b[0m'}  
         return rankPrint + suitSymbols[self.suit]
 
     def __repr__(self):
@@ -28,19 +29,21 @@ class Deck:
             for rank in xrange(2, 15):
                 self.deck.append(Card(rank, suit))
 
-    def deal(self):
-        pick = choice(self.deck)
-        self.deck.remove(pick)
-        return pick
+    def deal(self, numCards):
+        cards = []
+        for i in xrange(0, numCards):
+            pick = choice(self.deck)
+            self.deck.remove(pick)
+            cards.append(pick)
+        return cards
 
 class Hand:
 
     def __init__(self, deck):
-        self.card1 = deck.deal()
-        self.card2 = deck.deal()
+        self.cards = deck.deal(2)
 
     def __str__(self):
-        return str(self.card1) + " | " + str(self.card2)
+        return str(self.cards[0]) + " " + str(self.cards[1])
 
     def __repr__(self):
         return self.__str__()

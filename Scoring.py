@@ -2,22 +2,16 @@
 import Deck
 
 '''
-Straight flush  rank
-4 of a kind     rank
-full house      rank    2nd rank
-flush           rank    2nd rank    3rd rank    4th rank    5th rank
-straight        rank 
-3s              rank    2nd rank    3rd rank
-two pair        rank    2nd rank    3rd rank
-pair            rank    2nd rank    3rd rank    4th rank
-high cards      rank    2nd rank    3rd rank    4th rank    5th rank
+9. Straight flush  rank
+8. 4 of a kind     rank
+7. full house      rank    2nd rank
+6. flush           rank    2nd rank    3rd rank    4th rank    5th rank
+5. straight        rank 
+4. 3s              rank    2nd rank    3rd rank
+3. two pair        rank    2nd rank    3rd rank
+2. pair            rank    2nd rank    3rd rank    4th rank
+1. high cards      rank    2nd rank    3rd rank    4th rank    5th rank
 '''
-
-def dealFive(deck):
-    cards = []
-    for i in xrange(1, 6):
-        cards.append(deck.deal())
-    return cards
 
 def dictFromRanks(ranks):
     rankDict = {}
@@ -78,11 +72,20 @@ def evalFive(cards):
             eval[i] = handRanks[5 - i]
     return eval
 
-def allCombos(ls):
-    if len(ls) == 1:
-        return [ls]
-    else:
-        map(lambda lst: lst.append(ls[0]), allCombos(ls))
+def evalCards(cards):
+    numCards = len(cards)
+    if numCards == 5:
+        return evalFive(cards)
+    bestHand = [0, 0, 0, 0, 0, 0]
+    for i in xrange(0, numCards):
+        evalHand = evalCards(cards[0:i] + cards[i+1:numCards])
+        if evalHand > bestHand:
+            bestHand = evalHand
+    return bestHand
+
+
+
+
         
 
 
