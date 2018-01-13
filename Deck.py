@@ -11,11 +11,11 @@ class Card:
             rankPrint = ['T', 'J', 'Q', 'K', 'A'][self.rank - 10]
         else:
             rankPrint = str(self.rank)
-        rankPrint = '\x1b[0;37;44m' + rankPrint + '\x1b[0m'
-        suitSymbols = {'s' : '\x1b[0;30;44m\xE2\x99\xA0\x1b[0m',
-                       'c' : '\x1b[0;30;44m\xE2\x99\xA3\x1b[0m',
-                       'h' : '\x1b[0;31;44m\xE2\x99\xA5\x1b[0m',
-                       'd' : '\x1b[0;31;44m\xE2\x99\xA6\x1b[0m'}  
+        rankPrint = '\x1b[0;30;47m' + rankPrint + '\x1b[0m'
+        suitSymbols = {'s' : '\x1b[0;30;47m\xE2\x99\xA0\x1b[0m',
+                       'c' : '\x1b[0;30;47m\xE2\x99\xA3\x1b[0m',
+                       'h' : '\x1b[0;31;47m\xE2\x99\xA5\x1b[0m',
+                       'd' : '\x1b[0;31;47m\xE2\x99\xA6\x1b[0m'}  
         return rankPrint + suitSymbols[self.suit]
 
     def __repr__(self):
