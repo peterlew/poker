@@ -83,6 +83,21 @@ def evalCards(cards):
             bestHand = evalHand
     return bestHand
 
+def scoreRound(game):
+    bestScore = [0, 0, 0, 0, 0, 0]
+    winners = []
+    for player in game.activePlayers:
+        score = evalCards(game.community + player.hand.cards)
+        if score >= bestScore:
+            if score == bestScore:
+                winners.append(player)
+            else:
+                winners = [player]
+            bestScore = score
+    return winners
+
+
+
 
 
 
